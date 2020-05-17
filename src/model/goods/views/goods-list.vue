@@ -1,6 +1,6 @@
 <template>
     <div>
-        精品礼盒
+        商品列表
     </div>
 </template>
 <script>

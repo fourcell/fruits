@@ -3,50 +3,50 @@ export default [
         path: 'goods',
         name: 'goods',
         meta: {
-            title: '商品管理'
+            title: '商品'
         },
-        component: () => import('./views/index'),
+        component: () => import('./index'),
         children: [
             {
-                path: 'domestic',
-                name: 'domestic',
+                path: 'goodsList',
+                name: 'goodsList',
                 meta: {
-                    title: '国产水果'
+                    title: '商品列表'
                 },
-                component: () => import('./views/domestic')
+                component: () => import('./views/goods-list')
             },
             {
-                path: 'entrance',
-                name: 'entrance',
+                path: 'goodsAdd',
+                name: 'goodsAdd',
                 meta: {
-                    title: '进口水果'
+                    title: '添加商品'
                 },
-                component: () => import('./views/entrance')
+                component: () => import('./views/goods-add')
             },
             {
-                path: 'sarcocarp',
-                name: 'sarcocarp',
+                path: 'goodsType',
+                name: 'goodsType',
                 meta: {
-                    title: '果肉制品'
+                    title: '商品分类'
                 },
-                component: () => import('./views/sarcocarp')
+                component: () => import('./views/goods-type')
             },
             {
-                path: 'chemical',
-                name: 'chemical',
+                path: 'goodsGenre',
+                name: 'goodsGenre',
                 meta: {
-                    title: '有机化肥'
+                    title: '商品类型'
                 },
-                component: () => import('./views/chemical')
+                component: () => import('./views/goods-genre')
             },
             {
-                path: 'boutique',
-                name: 'boutique',
+                path: 'goodsBrand',
+                name: 'goodsBrand',
                 meta: {
-                    title: '精品礼盒'
+                    title: '品牌管理'
                 },
-                component: () => import('./views/boutique')
-            }
+                component: () => import('./views/goods-brand')
+            },
         ]
     }
 ]

@@ -2,16 +2,13 @@
   <el-container style="height: 500px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu
-        :default-openeds="['1', '3']"
+        :default-active="active"
         router
-        active-text-color="#409EFF" 
+        active-text-color="#409EFF"
         background-color="#304156"
-        text-color="#fff"
+        text-color="#bfcbd9"
+        @select="onSelect"
       >
-      <!--    active-text-color="#409EFF"   高亮颜色
-              background-color="#304156"    背景颜色
-              text-color="#fff"             字体颜色
-       -->
         <el-menu-item index="/manage/home">
           <i class="el-icon-setting"></i>
           <span slot="title">首页</span>
@@ -22,11 +19,10 @@
             {{item.name}}
           </template>
           <el-menu-item-group>
-            <el-menu-item
-              v-for="data in item.children"
-              :key="data.path"
-              :index="data.path"
-            >{{data.name}}</el-menu-item>
+            <el-menu-item v-for="data in item.children" :key="data.path" :index="data.path">
+              <i :class="data.Iconfont"></i>
+              {{data.name}}
+            </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -50,12 +46,22 @@ import routerList from "../../const/router";
 export default {
   data() {
     return {
+      active: "1",
       routerList
     };
+  },
+  methods: {
+    //改变导航栏激活的index
+    onSelect(index) {
+      this.active = index;
+    }
   }
 };
 </script>
 <style lang="scss">
+.el-aside {
+  background-color: #304156 !important;
+}
 .el-header {
   background-color: #b3c0d1;
   color: #333;

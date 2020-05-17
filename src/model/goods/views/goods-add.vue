@@ -1,6 +1,6 @@
 <template>
     <div>
-        有机化肥
+        添加商品
     </div>
 </template>
 <script>

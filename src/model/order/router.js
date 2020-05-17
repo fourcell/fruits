@@ -5,16 +5,41 @@ export default [
         meta: {
             title: '订单管理'
         },
-        component: () => import('./views/index'),
+        component: () => import('./index'),
         children: [
             {
-                path: 'message',
-                name: 'message',
+                path: 'orderList',
+                name: 'orderList',
                 meta: {
-                    title: '订单信息'
+                    title: '订单列表'
                 },
-                component: () => import('./views/message'),
-            }
+                component: () => import('./views/order-list'),
+            },
+            {
+                path: 'orderComfig',
+                name: 'orderComfig',
+                meta: {
+                    title: '订单设置'
+                },
+                component: () => import('./views/order-comfig'),
+            },
+            {
+                path: 'orderRefund',
+                name: 'orderRefund',
+                meta: {
+                    title: '退货申请处理'
+                },
+                component: () => import('./views/order-refund'),
+            },
+            {
+                path: 'orderCause',
+                name: 'orderCause',
+                meta: {
+                    title: '退货原因设置'
+                },
+                component: () => import('./views/order-cause'),
+            },
+            
         ]
     }
 ]

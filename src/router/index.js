@@ -8,16 +8,19 @@ import order from '../model/order/router'
 
 const routes = [
     {
-        path:'/login',
-        name:'login',
-        alias:'/',
-        component:()=>import('../pages/log')
+        path: '/login',
+        name: 'login',
+        alias: '/',
+        component: () => import('../pages/log')
     },
     {
-        path:'/manage',
-        name:'manage',
-        component:()=>import('../pages/manage'),
-        children:[
+        path: '/manage',
+        name: 'manage',
+        component: () => import('../pages/manage'),
+        meta: {
+            title: '首页'
+        },
+        children: [
             ...goods,
             ...home,
             ...user,

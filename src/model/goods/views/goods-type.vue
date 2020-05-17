@@ -1,6 +1,6 @@
 <template>
     <div>
-        果肉制品
+        商品分类
     </div>
 </template>
 <script>

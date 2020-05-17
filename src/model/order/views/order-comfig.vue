@@ -1,6 +1,6 @@
 <template>
     <div>
-        订单信息
+        订单设置
     </div>
 </template>
 <script>

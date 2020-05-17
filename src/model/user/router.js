@@ -5,15 +5,15 @@ export default [
         meta: {
             title: '用户管理'
         },
-        component: () => import('./views/index'),
+        component: () => import('./index'),
         children:[
             {
-                path:'message',
-                naem:'message',
+                path:'userList',
+                naem:'userList',
                 meta:{
                     title:'用户信息'
                 },
-                component:()=>import('./views/message')
+                component:()=>import('./views/user-list')
             }
         ]
     }
