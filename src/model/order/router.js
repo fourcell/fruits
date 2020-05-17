@@ -13,7 +13,7 @@ export default [
                 meta: {
                     title: '订单列表'
                 },
-                component: () => import('./views/order-list'),
+                component: () => import('./views/order-list/index'),
             },
             {
                 path: 'orderComfig',
@@ -21,7 +21,7 @@ export default [
                 meta: {
                     title: '订单设置'
                 },
-                component: () => import('./views/order-comfig'),
+                component: () => import('./views/order-comfig/index'),
             },
             {
                 path: 'orderRefund',
@@ -29,7 +29,7 @@ export default [
                 meta: {
                     title: '退货申请处理'
                 },
-                component: () => import('./views/order-refund'),
+                component: () => import('./views/order-refund/index'),
             },
             {
                 path: 'orderCause',
@@ -37,7 +37,7 @@ export default [
                 meta: {
                     title: '退货原因设置'
                 },
-                component: () => import('./views/order-cause'),
+                component: () => import('./views/order-cause/index'),
             },
             
         ]

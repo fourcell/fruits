@@ -17,6 +17,7 @@ const routes = [
         path: '/manage',
         name: 'manage',
         component: () => import('../pages/manage'),
+        redirect: '/manage/home',
         meta: {
             title: '首页'
         },

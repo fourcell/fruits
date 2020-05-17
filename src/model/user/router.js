@@ -13,7 +13,7 @@ export default [
                 meta:{
                     title:'用户信息'
                 },
-                component:()=>import('./views/user-list')
+                component:()=>import('./views/user-list/index')
             }
         ]
     }

@@ -13,7 +13,7 @@ export default [
                 meta: {
                     title: '商品列表'
                 },
-                component: () => import('./views/goods-list')
+                component: () => import('./views/goods-list/index.vue')
             },
             {
                 path: 'goodsAdd',
@@ -21,7 +21,7 @@ export default [
                 meta: {
                     title: '添加商品'
                 },
-                component: () => import('./views/goods-add')
+                component: () => import('./views/goods-add/index.vue')
             },
             {
                 path: 'goodsType',
@@ -29,7 +29,7 @@ export default [
                 meta: {
                     title: '商品分类'
                 },
-                component: () => import('./views/goods-type')
+                component: () => import('./views/goods-type/index.vue')
             },
             {
                 path: 'goodsGenre',
@@ -37,7 +37,7 @@ export default [
                 meta: {
                     title: '商品类型'
                 },
-                component: () => import('./views/goods-genre')
+                component: () => import('./views/goods-genre/index.vue')
             },
             {
                 path: 'goodsBrand',
@@ -45,7 +45,7 @@ export default [
                 meta: {
                     title: '品牌管理'
                 },
-                component: () => import('./views/goods-brand')
+                component: () => import('./views/goods-brand/index.vue')
             },
         ]
     }

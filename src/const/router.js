@@ -58,7 +58,7 @@ let router = [
         children: [
             {
                 path: '/manage/user/userList',
-                name: '用户信息'
+                name: '用户列表'
             }
         ]
     },

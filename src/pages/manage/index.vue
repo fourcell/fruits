@@ -30,7 +30,7 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span>头部在这里，复制粘贴这句话在vs code里找</span>
+        <ManageTop />
       </el-header>
 
       <el-main>
@@ -43,7 +43,11 @@
 
 <script>
 import routerList from "../../const/router";
+import ManageTop from "./components/manage-top";
 export default {
+  components: {
+    ManageTop
+  },
   data() {
     return {
       active: "1",
@@ -63,9 +67,9 @@ export default {
   background-color: #304156 !important;
 }
 .el-header {
-  background-color: #b3c0d1;
   color: #333;
   line-height: 60px;
+  padding: 0;
 }
 
 .el-aside {
