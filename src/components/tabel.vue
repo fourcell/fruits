@@ -4,11 +4,16 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
         v-for="(item,index) in columns "
+        align="center"
         :prop="item.prop"
         :label="item.label"
         :min-width="item.minWidth"
         :key="index"
-      ></el-table-column>
+      >
+        <template>
+          <img v-if="item.prop == 'src'" :src="item.src" alt />
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="100" v-if="operate">
         <template>
           <el-button type="text" size="small" @click="onUpdate">修改</el-button>
@@ -30,6 +35,7 @@
   </div>
 </template>
 <script>
+import logo from "../../src/assets/logo.png";
 export default {
   props: {
     columns: {
@@ -44,45 +50,57 @@ export default {
         return false;
       }
     },
-    newly:{
-      type:Boolean,
-      default(){
-        return false
+    newly: {
+      type: Boolean,
+      default() {
+        return false;
+      }
+    },
+    url: {
+      type: String,
+      default() {
+        return "";
       }
     }
   },
   data() {
     return {
+      logo,
       currentPage: 1,
       total: 10,
       value: true,
+      pages: 1,
+      size: 10,
       tableData: [
         {
-          id: "1",
-          studentName: "王小虎",
-          studentId: "20160252",
-          specialty: "计算机",
-          grade: "161",
-          studentPhone: "188888888",
-          studentEmail: "2747@163.com",
-          paperTopic: "划水",
-          teacherId: "10086",
-          teacherName: "呼哈大",
-          teacherAcademic: "全职",
-          teacherPhone: "18888888",
-          teacherEmail: "545@163.com",
-          disposeResult: "审核通过",
-          备注: ""
+          id:1
         }
       ]
     };
   },
+  created() {
+    this.getUrl();
+  },
   methods: {
-    handleSizeChange(val) {
-      this.$emit("pagination", val);
+    getUrl() {
+      this.$axios
+        .get(
+          `http://localhost:1910${this.url}?pages=${this.pages}&size=${this.size}`
+        )
+        .then(({ data }) => {
+          window.console.log(data);
+          this.tableData = data;
+        });
     },
+    //修改一页显示的条数
+    handleSizeChange(val) {
+      this.size = val;
+      this.getUrl();
+    },
+    //修改显示的页数
     handleCurrentChange(val) {
-      this.$emit("pages", val);
+      this.pages = val;
+      this.getUrl();
     },
     onUpdate(val) {
       this.$emit("update", val);
@@ -90,8 +108,8 @@ export default {
     onDelete(val) {
       this.$emit("Delete", val);
     },
-    onNewly(){
-      this.$emit('Newly')
+    onNewly() {
+      this.$emit("Newly");
     }
   }
 };
@@ -103,6 +121,10 @@ export default {
       padding-top: 10px;
       float: right;
     }
+  }
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
