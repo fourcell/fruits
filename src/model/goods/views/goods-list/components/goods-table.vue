@@ -2,25 +2,25 @@
   <div class="table">
     <el-table :data="tableData" border @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="60" align="center"></el-table-column>
-      <el-table-column prop="id" label="编号" width="100" align="center"></el-table-column>
+      <el-table-column prop="product_id" label="编号" width="100" align="center"></el-table-column>
       <el-table-column prop="img" label="商品图片" width="120" align="center">
         <template slot-scope="scope">
           <el-image style="width: 80px; height: 80px" :src="scope.row.img"></el-image>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="商品名称" align="center">
+      <el-table-column prop="p_name" label="商品名称" align="center">
         <template slot-scope="scope" class="conten">
-          <p>{{scope.row.name.name}}</p>
-          <p>品牌:{{scope.row.name.classify}}</p>
+          <p>商品名称:{{scope.row.p_name}}</p>
+          <p>详情:{{scope.row.describes}}</p>
         </template>
       </el-table-column>
       <el-table-column prop="price" label="价格/货号" width="120" align="center">
         <template slot-scope="scope">
-          <p>价格:￥{{scope.row.price.price}}</p>
-          <p>货号:{{scope.row.price.goodsID}}</p>
+          <p>价格:￥{{scope.row.price}}</p>
+          <!-- <p>货号:{{scope.row.price.goodsID}}</p> -->
         </template>
       </el-table-column>
-      <el-table-column prop="label" label="标签" width="140" align="center">
+      <!-- <el-table-column prop="label" label="标签" width="140" align="center">
         <template slot-scope="scope">
           <div class="label">
             <label>
@@ -49,20 +49,22 @@
             </label>
           </div>
         </template>
+      </el-table-column>-->
+      <!-- <el-table-column prop="sort" label="排序" width="100" align="center"></el-table-column> -->
+      <el-table-column prop="stock" label="SKU库存" width="100" align="center">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.stock" />
+        </template>
       </el-table-column>
-      <el-table-column prop="sort" label="排序" width="100" align="center"></el-table-column>
-      <el-table-column prop="address" label="SKU库存" width="100" align="center">
-        <el-button type="primary" icon="el-icon-edit" circle></el-button>
-      </el-table-column>
-      <el-table-column prop="sales" label="销量" width="100" align="center"></el-table-column>
+      <!--   <el-table-column prop="sales" label="销量" width="100" align="center"></el-table-column>
       <el-table-column prop="audit" label="审核状态" width="100" align="center">
         <template slot-scope="scope">
           <el-link :underline="false" target="_blank">{{scope.row.audit}}</el-link>
           <el-link :underline="false" type="primary">审核详情</el-link>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column label="操作" width="160" align="center">
-        <template>
+        <template slot-scope="scope">
           <label class="operation">
             <el-button size="small">查看</el-button>
           </label>
@@ -73,24 +75,24 @@
             <el-button size="small">日志</el-button>
           </label>
           <label class="operation">
-            <el-button size="small" type="danger">删除</el-button>
+            <el-button size="small" type="danger" @click="dele(scope.row)">删除</el-button>
           </label>
         </template>
       </el-table-column>
     </el-table>
-    <Base :options="options" />
+    <Base :options="options" @pagintion="toPagination" @number="toNumber" :total="total" />
   </div>
 </template>
 
 <script>
-import xiaomi from "../../../../../assets/logo.png";
 import Base from "./base";
-import { goodsList } from "../../../serve";
+import { goodsList, goodsDelete } from "../../../serve";
 export default {
   data() {
     return {
       pages: 1, //页数
       branches: 10, //每页条数
+      total: 0, //总页数
       options: [
         {
           value: "商品上架",
@@ -125,73 +127,20 @@ export default {
           label: "移入回收站"
         }
       ],
-      tableData: [
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        },
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        },
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        },
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        },
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        },
-        {
-          id: "20200203",
-          img: xiaomi,
-          name: { name: "华为 HUAWEI P20", classify: "华为" },
-          price: { price: "3788", goodsID: "6946605" },
-          label: { putaway: true, newProduct: true, recommend: false },
-          sort: 100,
-          sales: 0,
-          audit: "未审核"
-        }
-      ],
+      tableData: [],
       multipleSelection: []
     };
   },
   components: {
     Base
+  },
+  watch: {
+    pages() {
+      this.goodsList();
+    },
+    branches() {
+      this.goodsList();
+    }
   },
   created() {
     this.goodsList();
@@ -204,7 +153,9 @@ export default {
         branches: this.branches
       };
       goodsList(parm).then(data => {
-        window.console.log(data);
+        this.total = data.total;
+        this.tableData = data.payload;
+        window.console.log(this.total);
       });
     },
     handleSelectionChange(val) {
@@ -213,11 +164,22 @@ export default {
     },
     toPagination(val) {
       //子组件返回的页数
-      console.log(val);
+      this.pages = val;
     },
     toNumber(val) {
       //返回当前一页多少条数据
-      console.log(val);
+      this.branches = val;
+    },
+    //删除
+    dele(row) {
+      let { sku_id } = row;
+      goodsDelete({ sku_id }).then(() => {
+        this.$message({
+          message: "删除成功",
+          type: "success"
+        });
+        this.goodsList();
+      });
     }
   }
 };

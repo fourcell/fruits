@@ -90,7 +90,7 @@ export default {
             message: "添加成功",
             type: "success"
           });
-          // this.$router.go(0)
+          this.$router.push({path:'/manage/goods/goodsList'})
         }
       });
     },

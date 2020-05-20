@@ -4,13 +4,13 @@
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-button class="button" type="primary" size="small">确定</el-button>
-    <Pagination :total="20" :page="[5,10, 15]" @pagination="toPagination" @number="toNumber" />
+    <Pagination :total="total" :page="[5,10, 15]" @pagination="toPagination" @number="toNumber" />
   </div>
 </template>
 <script>
 import Pagination from "./Pagination";
 export default {
-  props: ["options"],
+  props: ["options",'total'],
   data() {
     return {
       value: ""
@@ -23,11 +23,11 @@ export default {
     },
     toPagination(val) {
       //子组件返回的页数
-      window.console.log(val);
+      this.$emit("pagintion", val);
     },
     toNumber(val) {
       //返回当前一页多少条数据
-      window.console.log(val);
+      this.$emit("Number", val);
     }
   },
   components: {

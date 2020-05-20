@@ -8,12 +8,11 @@
 
 <script>
 export default {
-    methods:{
-        goodadd(){
-            window.console.log(666)
-            // this.$router.push({path:'/manage/add'})
-        }
+  methods: {
+    goodadd() {
+      this.$emit("goodsAdd");
     }
+  }
 };
 </script>
 

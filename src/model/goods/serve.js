@@ -11,3 +11,6 @@ export const goodsAdd = parm => post('/goodsAdd', parm)
 
 //商品分页查询
 export const goodsList = parm => get('/goodsList', parm)
+
+//删除sku商品
+export const goodsDelete = parm => get('/goodsDelete', parm)

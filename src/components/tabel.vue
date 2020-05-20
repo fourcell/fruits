@@ -35,10 +35,15 @@
   </div>
 </template>
 <script>
-import logo from "../../src/assets/logo.png";
 export default {
   props: {
     columns: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    tableData: {
       type: Array,
       default() {
         return [];
@@ -65,33 +70,14 @@ export default {
   },
   data() {
     return {
-      logo,
       currentPage: 1,
       total: 10,
       value: true,
       pages: 1,
-      size: 10,
-      tableData: [
-        {
-          id:1
-        }
-      ]
+      size: 10
     };
   },
-  created() {
-    this.getUrl();
-  },
   methods: {
-    getUrl() {
-      this.$axios
-        .get(
-          `http://localhost:1910${this.url}?pages=${this.pages}&size=${this.size}`
-        )
-        .then(({ data }) => {
-          window.console.log(data);
-          this.tableData = data;
-        });
-    },
     //修改一页显示的条数
     handleSizeChange(val) {
       this.size = val;

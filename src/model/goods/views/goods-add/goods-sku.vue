@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       radio: "", //选择添加商品的sku
-      skuData: [{ color: 1, size: 2, price: 3, vipPrice: 4, sku: 5 }]
+      skuData: [{ color: '', size: '', price: '', vipPrice: '', sku: '' }]
     };
   },
   methods: {

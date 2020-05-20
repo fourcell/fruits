@@ -1,7 +1,7 @@
 <template>
   <div>
     <Search />
-    <List />
+    <List @goodsAdd="goodsAdd" />
     <GoodsTable />
   </div>
 </template>
@@ -15,5 +15,10 @@ export default {
     List,
     GoodsTable
   },
+  methods: {
+    goodsAdd() {
+      this.$router.push({ path: "/manage/goods/goodsAdd" });
+    }
+  }
 };
 </script>
