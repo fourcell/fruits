@@ -8,7 +8,7 @@
 <script>
 import Search from "../../../../components/search";
 import List from "../../../../components/list";
-import GoodsTable from "../../../../components/goods-table";
+import GoodsTable from "./components/goods-table";
 export default {
   components: {
     Search,

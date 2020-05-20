@@ -1,6 +1,6 @@
 
 <template>
-  <el-form ref="form" :model="form" label-width="80px" class="goods-add">
+  <el-form ref="form" :model="form" label-width="80px" class="goods-add" v-if="show">
     <el-form-item label="属性类型">
       <el-select v-model="form.type" placeholder="请选择">
         <el-option
@@ -16,17 +16,18 @@
       <el-input v-model="form.name"></el-input>
     </el-form-item>
     <!-- 商品规格 -->
-    <GoodsSku />
+    <GoodsSku ref="skuForm" />
     <el-form-item label="商品标题">
       <el-input v-model="form.title"></el-input>
     </el-form-item>
     <!--图片上传-->
     <el-form-item label="商品图片">
       <el-upload
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://localhost:3000/upload"
         list-type="picture-card"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
+        :on-success="onSuccess"
       >
         <i class="el-icon-plus"></i>
       </el-upload>
@@ -48,23 +49,26 @@
 </template>
 <script>
 import GoodsSku from "./goods-sku";
-import { selectType } from "../../serve";
+import { selectType, deleteUpload, goodsAdd } from "../../serve";
 export default {
   components: {
     GoodsSku
   },
   data() {
     return {
+      show: true, //刷新页面
       dialogImageUrl: "",
       dialogVisible: false,
       form: {
         type: "", //商品类型
         name: "", //商品名称
         title: "", //商品标题
+
         site: "", //发货地点
         details: "" //商品详情
       },
-      options: [] //类型列表
+      options: [], //类型列表
+      imgList: [] //图片列表
     };
   },
   created() {
@@ -73,15 +77,38 @@ export default {
     });
   },
   methods: {
-    onSubmit() {
-      console.log("submit!", this.$refs.skuForm);
+    async onSubmit() {
+      let sku = { ...this.$refs["skuForm"].skuData };
+      let parm = {
+        sku,
+        imgList: this.imgList,
+        goods: this.form
+      };
+      await goodsAdd(parm).then(({ code }) => {
+        if (code == 0) {
+          this.$message({
+            message: "添加成功",
+            type: "success"
+          });
+          // this.$router.go(0)
+        }
+      });
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    //删除
+    handleRemove({ response }, file) {
+      let imgurl = response.files.url;
+      deleteUpload({ imgurl }).then(() => {
+        this.imgList = file;
+      });
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
+    },
+    //成功回调
+    onSuccess({ files }) {
+      window.console.log(files.url)
+      this.imgList.push(files.url);
     }
   }
 };

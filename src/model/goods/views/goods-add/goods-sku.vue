@@ -1,11 +1,11 @@
 <template>
-  <el-form ref="skuForm" label-width="80px">
+  <el-form label-width="80px">
     <el-form-item label="商品规格">
       <div>
         <el-table :data="skuData" border style="width: 80%">
-          <el-table-column prop="data" label="颜色" align="center">
+          <el-table-column prop="color" label="颜色" align="center">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.data"></el-input>
+              <el-input v-model="scope.row.color"></el-input>
             </template>
           </el-table-column>
           <el-table-column prop="size" label="尺寸" align="center">
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       radio: "", //选择添加商品的sku
-      skuData: [{ data: 456, size: 456 }]
+      skuData: [{ color: 1, size: 2, price: 3, vipPrice: 4, sku: 5 }]
     };
   },
   methods: {
@@ -54,7 +54,13 @@ export default {
       this.skuData.length > 1 ? this.skuData.splice(index, 1) : null;
     },
     add() {
-      this.skuData.push({});
+      this.skuData.push({
+        color: "",
+        size: "",
+        price: "",
+        vipPrice: "",
+        sku: ""
+      });
     }
   }
 };

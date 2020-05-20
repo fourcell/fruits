@@ -78,32 +78,57 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <div class="pagination">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination>
-    </div>
+    <Base :options="options" />
   </div>
 </template>
 
 <script>
-// import xiaomi from "../../assets/xiaomi.jpg";
+import xiaomi from "../../../../../assets/logo.png";
+import Base from "./base";
+import { goodsList } from "../../../serve";
 export default {
   data() {
     return {
-      xiaomi:
-        "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/macrozheng_small_icon.png",
+      pages: 1, //页数
+      branches: 10, //每页条数
+      options: [
+        {
+          value: "商品上架",
+          label: "商品上架"
+        },
+        {
+          value: "商品下架",
+          label: "商品下架"
+        },
+        {
+          value: "设置推荐",
+          label: "设置推荐"
+        },
+        {
+          value: "取消推荐",
+          label: "取消推荐"
+        },
+        {
+          value: "设为新品",
+          label: "设为新品"
+        },
+        {
+          value: "取消新品",
+          label: "取消新品"
+        },
+        {
+          value: "转移分类",
+          label: "转移分类"
+        },
+        {
+          value: "移入回收站",
+          label: "移入回收站"
+        }
+      ],
       tableData: [
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -113,7 +138,7 @@ export default {
         },
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -123,7 +148,7 @@ export default {
         },
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -133,7 +158,7 @@ export default {
         },
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -143,7 +168,7 @@ export default {
         },
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -153,7 +178,7 @@ export default {
         },
         {
           id: "20200203",
-          img: this.xiaomi,
+          img: xiaomi,
           name: { name: "华为 HUAWEI P20", classify: "华为" },
           price: { price: "3788", goodsID: "6946605" },
           label: { putaway: true, newProduct: true, recommend: false },
@@ -165,18 +190,34 @@ export default {
       multipleSelection: []
     };
   },
+  components: {
+    Base
+  },
+  created() {
+    this.goodsList();
+  },
   methods: {
+    //请求数据
+    goodsList() {
+      let parm = {
+        pages: this.pages,
+        branches: this.branches
+      };
+      goodsList(parm).then(data => {
+        window.console.log(data);
+      });
+    },
     handleSelectionChange(val) {
       //table 选中的的返回到multipleSelection
       this.multipleSelection = val;
     },
-    //修改一页显示的条数...............
-    handleSizeChange(val) {
-      window.console.log(val);
+    toPagination(val) {
+      //子组件返回的页数
+      console.log(val);
     },
-    //修改显示的页数
-    handleCurrentChange(val) {
-      window.console.log(val);
+    toNumber(val) {
+      //返回当前一页多少条数据
+      console.log(val);
     }
   }
 };
@@ -224,12 +265,6 @@ export default {
 
   .el-table .success-row {
     background: #f0f9eb;
-  }
-  .pagination {
-    .el-pagination {
-      padding-top: 10px;
-      float: right;
-    }
   }
 }
 </style>

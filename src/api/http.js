@@ -1,7 +1,8 @@
 /**axios封装
   * 请求拦截、相应拦截、错误统一处理
   */
- import axios from 'axios'; import QS from 'qs';
+ import axios from 'axios'; 
+//  import QS from 'qs';
  import store from '../state/index'
  import router from '../router/index'
  
@@ -111,7 +112,7 @@
    */
  export function post(url, params) {
      return new Promise((resolve, reject) => {
-         axios.post(url, QS.stringify(params))
+         axios.post(url, (params))
              .then(res => {
                  resolve(res.data);
              })
