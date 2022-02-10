@@ -14,7 +14,7 @@
     "element-ui": "^2.13.1",
     "install": "^0.13.0",
     "node-load": "^0.0.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
